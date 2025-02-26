@@ -63,6 +63,8 @@ def delete_pet(id_pet: int):
 def get_age_percentage(id_pet: int, max_age: int = 20):
     for pet in pets:
         if pet.id_pet == id_pet:
-            return {"id_pet": id_pet, "age_percentage": pet.age_percentage(max_age)}
-    raise HTTPException(status_code=404, detail="Pet not found")
+            age_percentage = pet.age_percentage(max_age)
+            message = f"Su mascota ha vivido el {age_percentage:.2f}% de la vida útil esperada de {max_age} años."
+            return {"id_pet": id_pet, "age_percentage": age_percentage, "message": message}
 
+    raise HTTPException(status_code=404, detail="Pet not found")
